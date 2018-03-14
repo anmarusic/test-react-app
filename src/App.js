@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { InputComponent } from './input-component/input-component'
+
 
 
 class App extends Component {
@@ -9,8 +11,17 @@ class App extends Component {
     super();
 
     this.state = {
-      color: ''
+      color: '',
+      value: ''
     }
+
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
 
   componentDidMount() {
@@ -31,15 +42,21 @@ class App extends Component {
   }
 
   render() {
+    let c = this.state.color
+    let v = this.state.value
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">{this.state.color}</h1>
+          <InputComponent color={c} value={v} />
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <label>
+        Name:
+        <input type="text" value={this.state.value} onChange={this.handleChange} />
+      </label>
       </div>
     );
   }
